@@ -1,3 +1,4 @@
 ^fars\.Rproj$
 ^\.Rproj\.user$
 ^\.Rhistory
+^\.travis\.yml$
