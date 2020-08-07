@@ -1,0 +1,63 @@
+---
+title: "fars"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{A Package for Summarizing and Plotting US Traffic Accidents}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+# A Package for Summarizing and Plotting US Traffic Accidents
+
+This package is an assigment of Coursera course 'Building an R package', and has functions for summarizing and plotting maps from US traffic accidents data. Data is received from US National Highway Traffic Safety Administration's Fatality Analysis Reporting System, which is a nationwide census providing the American public yearly data regarding fatal injuries suffered in motor vehicle traffic crashes. Instructions for data access here:  https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars.
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message = FALSE}
+library(fars)
+library(dplyr)
+
+```
+
+```{r load-example-data, include=FALSE}
+system.file("extdata", "accident_2013.csv.bz2",
+            package = "fars")
+system.file("extdata", "accident_2014.csv.bz2",
+            package = "fars")
+system.file("extdata", "accident_2015.csv.bz2",
+            package = "fars")
+
+```
+
+
+## Functions
+
+Package has fife functions for US accidents data summarizing and plotting:
+
+* Main functions
+  * `fars_summarize_years()`: summarizes accidents data 
+  * `fars_map_state()`: draws map of accident locations by state and year  
+
+* Helpers (used by main functions)
+  * `fars_read()`: reads csv data
+  * `make_filename()` : makes a filename by adding year to default data file 'accident_YYYY.csv.bz2'
+  * `fars_read_years()`: returns accidents data by year and month  
+
+## Summarizing yearly accidents
+Select one or several years for summaries, function will return a tibble with monthly number of accidents each year.
+
+
+```{r, iclude = FALSE, warning = FALSE, message=FALSE}
+fars_summarize_years(c(2013, 2014, 2015))
+```
+
+
+## Plot maps with accidents
+Accident locations can be plotted by state and year.
+```{r, iclude = FALSE, warning = FALSE, message=FALSE}
+fars_map_state(41, 2014)
+```
